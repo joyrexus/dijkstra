@@ -3,10 +3,21 @@ Quick and dirty implementation of [Dijkstra's algorithm](http://en.wikipedia.org
 This implementation has a *O((m+n) log n)* running time, where *n* is the number of
 vertices and *m* is the number of edges. If the graph is connected (i.e. in one piece), *m* normally dominates over *n*, making the algorithm *O(m log n)* overall.
 
+## Usage
+
+```python
+from dijkstra import dijkstra, shortest_path
+```
+
 The main function takes as arguments a graph structure and a starting vertex.  
+
+```python
+dist, pred = dijkstra(graph, start='a') 
+```
 
 The graph structure should be a dict of dicts, a mapping of each node `v` to its
 successor nodes `w` and their respective edge weights (`v -> w`).
+
 
 ```python
 graph = {'a': {'b': 1}, 
