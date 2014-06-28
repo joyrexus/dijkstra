@@ -1,5 +1,5 @@
 from nose.tools import assert_raises
-from dijkstra import make_graph, dijkstra
+from dijkstra import dijkstra, shortest_path, make_graph
 
 
 def test_make_graph():
@@ -47,6 +47,29 @@ def test_dijkstra():
     dist, pred = dijkstra(graph, start='a')
     assert dist == {'a': 0, 'c': 3, 'b': 1, 'd': 4}
     assert pred == {'b': 'a', 'c': 'b', 'd': 'c'}
+
+
+def test_shortest_path():
+    '''
+    Get shortest path distances from start to end node.
+
+    '''
+    graph = {'a': {'b': 1}, 
+             'b': {'c': 2, 'b': 5}, 
+             'c': {'d': 1},
+             'd': {}}
+    assert shortest_path(graph, 'a', 'a') == ['a']
+    assert shortest_path(graph, 'a', 'b') == ['a', 'b']
+    assert shortest_path(graph, 'a', 'c') == ['a', 'b', 'c']
+    assert shortest_path(graph, 'a', 'd') == ['a', 'b', 'c', 'd']
+
+    graph = {'a': {'b':14, 'c':9, 'd':7},
+             'b': {'a':14, 'c':2, 'e':9},
+             'c': {'a':9, 'b':2, 'd':10, 'f':11},
+             'd': {'a':7, 'c':10, 'f':15},
+             'e': {'b':9, 'f':6},
+             'f': {'c':11, 'd':15, 'e':6}}
+    assert shortest_path(graph, 'a', 'e') == ['a', 'c', 'b', 'e']
 
 
 def test_answer():

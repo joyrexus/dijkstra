@@ -1,7 +1,7 @@
 from pqdict import PQDict
 
 
-def dijkstra(G, start):
+def dijkstra(G, start, end=None):
     '''
     dijkstra's algorithm determines the length from `start` to every other 
     vertex in the graph.
@@ -42,6 +42,7 @@ def dijkstra(G, start):
         (v, d) = Q.popitem()                    # node w/ min dist d on frontier
         D[v] = d                                # est dijkstra greedy score
         U.remove(v)                             # remove from unexplored
+        if v == end: break
 
         # now consider the edges from v with an unexplored head -
         # we may need to update the dist of unexplored successors 
@@ -53,6 +54,17 @@ def dijkstra(G, start):
                     P[w] = v                    # set/update predecessor
 
     return D, P
+
+
+def shortest_path(G, start, end):
+    dist, pred = dijkstra(G, start, end)
+    v = end
+    path = [v]
+    while v != start:
+        v = pred[v]
+        path.append(v)        
+    path.reverse()
+    return path
 
 
 def make_graph(filename):
@@ -115,6 +127,7 @@ if __name__ == '__main__':
     dist, pred = dijkstra(graph, 'a') 
     assert dist == {'a': 0, 'c': 3, 'b': 1, 'd': 4}     # min dist from `a`
     assert pred == {'b': 'a', 'c': 'b', 'd': 'c'}       # direct predecessors
+    assert shortest_path(graph, 'a', 'd') == list('abcd')
 
     graph = {'a': {'b': 14, 'c': 9, 'd': 7},
              'b': {'a': 14, 'c': 2, 'e': 9},
@@ -126,3 +139,4 @@ if __name__ == '__main__':
     dist, pred = dijkstra(graph, start='a')
     expected = {'a': 0, 'c': 9, 'b': 11, 'e': 20, 'd': 7, 'f': 20}
     assert dist == expected
+

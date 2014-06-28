@@ -30,3 +30,18 @@ assert dist == {'a': 0, 'c': 3, 'b': 1, 'd': 4}
 ```python
 assert pred == {'b': 'a', 'c': 'b', 'd': 'c'}
 ```
+
+The `dijkstra` function allows us to easily compute shortest paths between two
+nodes in a graph.  The `shortest_path` function is provided as a convenience:
+
+```python
+graph = {'a': {'b': 1}, 
+         'b': {'c': 2, 'b': 5}, 
+         'c': {'d': 1},
+         'd': {}}
+
+assert shortest_path(graph, 'a', 'a') == ['a']
+assert shortest_path(graph, 'a', 'b') == ['a', 'b']
+assert shortest_path(graph, 'a', 'c') == ['a', 'b', 'c']
+assert shortest_path(graph, 'a', 'd') == ['a', 'b', 'c', 'd']
+```
