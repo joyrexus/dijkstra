@@ -56,3 +56,11 @@ assert shortest_path(graph, 'a', 'b') == ['a', 'b']
 assert shortest_path(graph, 'a', 'c') == ['a', 'b', 'c']
 assert shortest_path(graph, 'a', 'd') == ['a', 'b', 'c', 'd']
 ```
+
+
+## See Also
+
+Other implementations using an [indexed priority queue](https://github.com/nvictus/priority-queue-dictionary#what-is-an-indexed-priority-queue):
+
+* [Variant 1](http://code.activestate.com/recipes/119466-dijkstras-algorithm-for-shortest-paths/)
+* [Variant 2](https://github.com/nvictus/priority-queue-dictionary/blob/master/examples/dijkstra.py)
